@@ -39,5 +39,7 @@ while True:
             print('\n\n')
     print('#'*80)
     print('Retrying in 60 seconds...')
-
-    time.sleep(60)
+    try:
+        time.sleep(60)
+    except KeyboardInterrupt:
+        exit('\nHave a nice day at the Buergeramt!\n')
