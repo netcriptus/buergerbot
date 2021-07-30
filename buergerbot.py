@@ -11,7 +11,7 @@ https://service.berlin.de/terminvereinbarung/termin/tag.php?termin=1&anliegen[]=
 """
 termin_url = "http://service.berlin.de/terminvereinbarung/termin"
 headers = {
-    "User-Agent": "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3 (FM Scene 4.6.1) ",
+    "User-Agent": "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3 (FM Scene 4.6.1) ",  # noqa
     "Accept-Encoding": ", ".join(("gzip", "deflate")),
     "Accept": "*/*",
     "Connection": "keep-alive",
@@ -48,9 +48,11 @@ def main():
 
         body = bs4.BeautifulSoup(response.content, "html.parser")
         months = body.select(".calendar-month-table")
+        links_found = False
         for month in months:
             links = month.select("td.buchbar a")
             if links:
+                links_found = True
                 print("\t\t{}\n".format(get_month_name(month)))
                 for link in links:
                     day_url = shorten_url(link)
@@ -58,6 +60,8 @@ def main():
                     # URL shortener service will refuse the request if we go too fast.
                     time.sleep(0.1)
                 print("\n\n")
+        if not links_found:
+            print("\tNo available dates found this time.")
         print("#" * 80)
         print("Retrying in 60 seconds...")
         try:
