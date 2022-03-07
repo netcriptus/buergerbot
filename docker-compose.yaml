@@ -8,4 +8,4 @@ services:
      - .:/app
     environment:
       - PYTHONUNBUFFERED=1
-    command: python /app/buergerbot.py
+    command: python3 /app/buergerbot.py
