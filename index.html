@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>WebSockets Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.min.js"></script>
+
+    <script type="text/javascript" charset="utf-8">
+       $(document).ready(function(){
+
+           var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+           socket.on('connect', function() {
+               socket.emit('am up', {data: 'I\'m connected!'});
+           });
+        //    listens to 'price update' message on socket
+           socket.on('calendar update', function(msg) {
+               html_data = msg['html_data']
+               retry_time = msg['retry_time']
+               if (html_data != null) {
+                    $('#title').text('Available dates:')
+                    $('#date_info').empty()
+                    $('#date_info').append(html_data)
+               }
+
+               $('#next_retry').empty()
+               $('#next_retry').text(retry_time)
+           });
+
+       });
+   </script>
+</head>
+<body>
+    <h1 id="title">Fetching dates...</h1>
+    <div id="date_info"></div>
+    <div id="next_retry"></div>
+</body>
+</html>

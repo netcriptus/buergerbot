@@ -16,6 +16,7 @@ shortener = Shortener()
 services = ["chilpit", "clckru", "dagd", "isgd", "tinyurl"]
 global_link_counter = 0
 retry_time = 10
+session = requests.Session()
 
 
 def mount_url(date_link):
@@ -35,6 +36,18 @@ def shorten_url(long_url_tag):
     except (requests.exceptions.ReadTimeout, TypeError):
         return short_url
 
+def fetch_months():
+    response = session.get(url)
+    if response.status_code != 200:
+        exit(f"Something went wrong, status code {response.status_code}, please try again")
+
+    body = bs4.BeautifulSoup(response.content, "html.parser")
+    months = body.select(".calendar-month-table")
+    return months
+
+def extract_links(month):
+    links = month.select("td.buchbar a")
+    return [(link.text, shorten_url(link)) for link in links]
 
 def main():
     session = requests.Session()

@@ -17,7 +17,7 @@ pip install -r requeriments.txt
 ### Running
 
 ```
-./buergerbot
+./app.py
 ```
 
-It will refresh the page every 60 seconds looking for any available day in the next 2 months.
+It will refresh the page every 10 seconds looking for any available day in the next 2 months.
