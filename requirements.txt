@@ -4,8 +4,5 @@ requests
 flask
 flask-socketio
 apscheduler
-# TODO: fix playsound for linux
-# playsound
-# pycairo
-# PyGObject
-# PyObjC
+gevent
+uwsgi
