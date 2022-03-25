@@ -110,10 +110,10 @@ def main():
             if links:
                 links_found = True
                 print(f"\t\t{get_month_name(month)}\n")
+                # experimental async feature
                 day_links = asyncio.run(await_day_links(links))
                 for link_tuple in day_links:
                     if link_tuple:
-                        # day_url = shorten_url(link)
                         print("\t{} -> {}, {}, {}".format(link_tuple[0], link_tuple[1], link_tuple[2], link_tuple[3]))
                     else:
                         print("False alarm")
