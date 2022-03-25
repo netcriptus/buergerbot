@@ -1,8 +1,8 @@
 beautifulsoup4
 pyshorteners
 requests
-# TODO: fix playsound for linux
-# playsound
-# pycairo
-# PyGObject
-# PyObjC
+flask
+flask-socketio
+apscheduler
+gevent
+uwsgi
