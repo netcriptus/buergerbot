@@ -1,8 +1,0 @@
-apscheduler
-beautifulsoup4
-flask
-flask-socketio
-gevent
-pyshorteners
-requests
-uwsgi
